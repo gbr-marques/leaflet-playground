@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-col items-center justify-center gap-4 h-[85dvh] min-w-[100dvw] p-5"
+    class="flex flex-col items-center justify-center gap-4 h-[85dvh] min-w-[100dvw] p-7"
   >
     <div class="w-fit max-w-[300px] flex flex-col gap-6 items-center justify-between p-7 bg-white rounded-xl shadow-xl">
       <!-- <img class="w-[40dvw]" src="@/assets/img/logo_prefeitura_sp.png" alt="" /> -->
