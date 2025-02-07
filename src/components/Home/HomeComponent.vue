@@ -43,6 +43,7 @@
     v-model:visible="visibleFilter"
     header="Filtre quais pontos você gostaria de visualizar"
     modal
+    class="w-[80dvw]"
   >
     <div class="flex flex-col gap-3">
       <div v-for="zone in zones" :key="zone" class="flex gap-3">
