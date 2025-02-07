@@ -1,0 +1,49 @@
+/* @import './base.css'; */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900');
+
+* {
+  font-family: 'Inter', sans-serif ; 
+}
+
+body {
+  background-image: url("/src/assets/img/bg_carnaval.png");
+  background-size: cover;
+  height: 100dvh;
+}
+
+.exo {
+  font-family: "Exo", sans-serif;
+}
+
+#app {
+ 
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #app {
+   
+  }
+ 
+}
