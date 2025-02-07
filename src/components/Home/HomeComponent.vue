@@ -2,8 +2,8 @@
   <section
     class="flex flex-col items-center justify-between gap-5 h-[85dvh] min-w-[100dvw] p-5"
   >
-
     <h1 class="exo font-bold text-white text-2xl">Pontos de apoio Carnaval 2025</h1>
+    <Button @click="$router.push('/login')" label="Área administrativa"></Button>
     <div id="map" class="w-[85%] h-[100%] rounded-2xl relative shadow-xl">
       <div class="z-500 flex gap-3 absolute right-[20px] bottom-[20px]">
         <Button rounded icon="pi pi-sliders-h" @click="visibleFilter = true"></Button>
@@ -43,7 +43,7 @@
     v-model:visible="visibleFilter"
     header="Filtre quais pontos você gostaria de visualizar"
     modal
-    class="w-[80dvw]"
+    class="w-[]"
   >
     <div class="flex flex-col gap-3">
       <div v-for="zone in zones" :key="zone" class="flex gap-3">
@@ -59,6 +59,9 @@
 import { ref, onMounted, watch } from 'vue'
 import L from 'leaflet'
 import { Button, ButtonGroup, Checkbox, Dialog, Divider } from 'primevue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const visibleInfo = ref(false)
 const visibleFilter = ref(false)
