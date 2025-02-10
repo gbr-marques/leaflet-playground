@@ -304,29 +304,29 @@ const markers = ref([
   },
 ])
 const markerGroup = ref(null)
+const userGroup = ref(null)
 const selectedMarker = ref(null)
 
 const zones = ['Norte', 'Sul', 'Leste', 'Oeste', 'Centro']
 const filteredZones = ref([])
 
 const userIcon = L.icon({
-    iconUrl: userPin,
-    iconSize: [45, 58],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
+  iconUrl: userPin,
+  iconSize: [45, 58],
+  iconAnchor: [22, 94],
+  popupAnchor: [-3, -76],
+  shadowSize: [68, 95],
+  shadowAnchor: [22, 94],
 })
 
 const markerIcon = L.icon({
-    iconUrl: markerPin,
-    iconSize: [45, 58],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
+  iconUrl: markerPin,
+  iconSize: [45, 58],
+  iconAnchor: [22, 94],
+  popupAnchor: [-3, -76],
+  shadowSize: [68, 95],
+  shadowAnchor: [22, 94],
 })
-
 
 onMounted(() => {
   map.value = L.map('map').setView([-23.627974, -46.624194], 10.5)
@@ -335,14 +335,24 @@ onMounted(() => {
 
   markerGroup.value = L.layerGroup().addTo(map.value)
 
-  createMarkers(markers.value)
+  userGroup.value = L.layerGroup().addTo(map.value)
 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (location) {
+      let lat = location.coords.latitude
+      let lng = location.coords.longitude
+      L.marker([lat, lng], { icon: userIcon }).addTo(userGroup.value)
+    })
+  }
+
+  createMarkers(markers.value)
 })
 
 const createMarkers = (markersList) => {
   markersList.forEach((marker) => {
-    const leafletMarker = L.marker([marker.lat, marker.lng], {icon: markerIcon})
-      .addTo(markerGroup.value)  // Adicionando ao grupo de marcadores
+    const leafletMarker = L.marker([marker.lat, marker.lng], { icon: markerIcon }).addTo(
+      markerGroup.value,
+    ) // Adicionando ao grupo de marcadores
       .bindPopup(`
       <div class="popup">
         <img src="${marker.img}" alt="Marker Image" class="popup-img">
@@ -383,7 +393,6 @@ const clearMarkers = () => {
 }
 
 const filterZones = (filteredZones) => {
-
   // console.log('filterZones chamado')
 
   if (filteredZones.length > 0) {
@@ -398,7 +407,7 @@ const filterZones = (filteredZones) => {
     // Limpa os filtros existentes
     clearMarkers()
     // Adiciona os marcadores filtrados
-   createMarkers(marcadoresFiltrados)
+    createMarkers(marcadoresFiltrados)
   } else {
     // Limpa os filtros existentes
     clearMarkers()
@@ -408,8 +417,7 @@ const filterZones = (filteredZones) => {
   // Oculta o modal de filtro
   visibleFilter.value = false
 
-  markers.value.forEach(marker => map.value.removeLayer(marker))
-
+  markers.value.forEach((marker) => map.value.removeLayer(marker))
 }
 </script>
 
