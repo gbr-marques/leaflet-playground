@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col items-center justify-between gap-5 h-[85dvh] min-w-[100dvw] p-5">
-    <h1 class="exo font-bold text-white text-2xl">Pontos de apoio Carnaval 2025</h1>
+    <h1 class="exo font-bold text-white text-2xl">Pontos de Apoio Carnaval 2025</h1>
     <!-- <Button @click="$router.push('/login')" label="Área administrativa"></Button> -->
     <div id="map" class="w-[85%] h-[100%] rounded-2xl relative shadow-xl">
       <div class="z-500 flex gap-3 absolute right-[20px] bottom-[20px]">
