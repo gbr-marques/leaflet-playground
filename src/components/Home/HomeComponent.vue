@@ -1,9 +1,7 @@
 <template>
-  <section
-    class="flex flex-col items-center justify-between gap-5 h-[85dvh] min-w-[100dvw] p-5"
-  >
+  <section class="flex flex-col items-center justify-between gap-5 h-[85dvh] min-w-[100dvw] p-5">
     <h1 class="exo font-bold text-white text-2xl">Pontos de apoio Carnaval 2025</h1>
-    <Button @click="$router.push('/login')" label="Área administrativa"></Button>
+    <!-- <Button @click="$router.push('/login')" label="Área administrativa"></Button> -->
     <div id="map" class="w-[85%] h-[100%] rounded-2xl relative shadow-xl">
       <div class="z-500 flex gap-3 absolute right-[20px] bottom-[20px]">
         <Button rounded icon="pi pi-sliders-h" @click="visibleFilter = true"></Button>
@@ -13,7 +11,6 @@
         </ButtonGroup>
       </div>
     </div>
-
   </section>
   <!-- <Button label="Teste"></Button> -->
   <Dialog v-model:visible="visibleInfo" close-icon="false" :show-header="false" modal>
@@ -60,6 +57,8 @@ import { ref, onMounted, watch } from 'vue'
 import L from 'leaflet'
 import { Button, ButtonGroup, Checkbox, Dialog, Divider } from 'primevue'
 import { useRouter } from 'vue-router'
+import userPin from '@/assets/img/user_pin.png'
+import markerPin from '@/assets/img/marker_pin.png'
 
 const router = useRouter()
 
@@ -310,6 +309,25 @@ const selectedMarker = ref(null)
 const zones = ['Norte', 'Sul', 'Leste', 'Oeste', 'Centro']
 const filteredZones = ref([])
 
+const userIcon = L.icon({
+    iconUrl: userPin,
+    iconSize: [45, 58],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+})
+
+const markerIcon = L.icon({
+    iconUrl: markerPin,
+    iconSize: [45, 58],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+})
+
+
 onMounted(() => {
   map.value = L.map('map').setView([-23.627974, -46.624194], 10.5)
 
@@ -323,7 +341,7 @@ onMounted(() => {
 
 const createMarkers = (markersList) => {
   markersList.forEach((marker) => {
-    const leafletMarker = L.marker([marker.lat, marker.lng])
+    const leafletMarker = L.marker([marker.lat, marker.lng], {icon: markerIcon})
       .addTo(markerGroup.value)  // Adicionando ao grupo de marcadores
       .bindPopup(`
       <div class="popup">
